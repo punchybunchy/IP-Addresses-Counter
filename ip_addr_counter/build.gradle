@@ -2,6 +2,7 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.adarshr.test-logger' version '3.2.0'
+    id 'jacoco'
 }
 
 compileJava {
@@ -11,6 +12,10 @@ compileJava {
 
 group = 'punchybunchy.code'
 version = '1.0-SNAPSHOT'
+
+application {
+    mainClass = 'punchybunchy.code.Main'
+}
 
 repositories {
     mavenCentral()
@@ -31,4 +36,19 @@ test {
 testlogger {
     theme 'standard'
     showStandardStreams true
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+test {
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
 }

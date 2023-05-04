@@ -3,7 +3,7 @@ package punchybunchy.code;
 import java.util.HashMap;
 import java.util.Map;
 
-import static punchybunchy.code.util.IpAddressConvertor.INVALID_IP_ADDRESS;
+import static punchybunchy.code.util.IpAddressConverter.INVALID_IP_ADDRESS;
 
 public final class TreeNode {
     private boolean isLeaf;

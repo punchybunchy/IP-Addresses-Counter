@@ -1,7 +1,7 @@
 package punchybunchy.code;
 
 import punchybunchy.code.util.FileReader;
-import punchybunchy.code.util.IpAddressConvertor;
+import punchybunchy.code.util.IpAddressConverter;
 import punchybunchy.code.util.IpAddressGenerator;
 
 //Задачу подсчета уникальных ip адресов предлагается решить используя префиксное дерево Trie
@@ -27,7 +27,7 @@ public class Main {
                     //Так как сложность добавления O(k), где k длина ключа, имеет смысл сократить "путь"
                     // Приведем вид ip адреса к десятичному типу long
                     //Сократим строку вида 255.255.255.255 (15 символов) до 4294967295 (10 символов)
-                    long number = IpAddressConvertor.ipToLong(line);
+                    long number = IpAddressConverter.ipToLong(line);
                     String key = String.valueOf(number);
 
                     //Построчно заполняем дерево. Передаем полученное число в виде строки
