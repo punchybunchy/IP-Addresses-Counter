@@ -25,7 +25,7 @@ public class IpAddressConvertor {
         //Проверяем, что числа октетов, полученного ip адреса валидные
         for (String element : ip) {
             int decimalNumber = Integer.parseInt(element);
-            if ( decimalNumber >= SIZE_IN_DECIMAL_FORM) {
+            if (decimalNumber >= SIZE_IN_DECIMAL_FORM) {
                 System.out.printf("The input string: %s - is not an IP address \n", element);
                 return INVALID_IP_ADDRESS;
             }

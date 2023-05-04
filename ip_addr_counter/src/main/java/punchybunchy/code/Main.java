@@ -13,8 +13,8 @@ import punchybunchy.code.util.IpAddressGenerator;
 
 public class Main {
     public static void main(String[] args) {
-        //Для демонстрации работы приложения сгенерируем 100 тыс адресов и сохраняем в файл
-        final int amountOfIpAddresses = 100000;
+        //Для демонстрации работы приложения сгенерируем 1млн адресов и сохраняем в файл
+        final int amountOfIpAddresses = 1000000;
         final String filePath = "./src/main/resources/ips";
         IpAddressGenerator.generateIpAddressesCollection(amountOfIpAddresses, filePath);
 

@@ -10,11 +10,11 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestIpCounter {
-    TreeNode treeNode;
+    private TreeNode treeNode;
 
 
     @BeforeEach
-    void init() {
+    final void init() {
         treeNode = TreeNode.create();
     }
 
@@ -30,6 +30,8 @@ public class TestIpCounter {
                 "0.0.1.0"
         );
 
+        final int numberOfUniqueIps = 5;
+
         exampleIps
                 .forEach(line -> {
                     long number = IpAddressConvertor.ipToLong(line);
@@ -37,9 +39,8 @@ public class TestIpCounter {
                     treeNode.insert(key);
                 });
         long actual = treeNode.getIpAddressesCounter();
-        long expected = 5;
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isEqualTo(numberOfUniqueIps);
     }
 
     @Test
@@ -55,6 +56,8 @@ public class TestIpCounter {
                 "0.0.1.0.1"
         );
 
+        final int numberOfUniqueIps = 4;
+
         exampleIps
                 .forEach(line -> {
                     long number = IpAddressConvertor.ipToLong(line);
@@ -62,9 +65,8 @@ public class TestIpCounter {
                     treeNode.insert(key);
                 });
         long actual = treeNode.getIpAddressesCounter();
-        long expected = 4;
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isEqualTo(numberOfUniqueIps);
     }
 
 }
