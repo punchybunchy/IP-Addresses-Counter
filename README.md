@@ -42,10 +42,10 @@ make install
 ```
 
 ## Start application
+###### Please don't forget to install before start
 
 ```bash
 make start
-Please don't forget to install before start
 ```
 
 ## Run application
