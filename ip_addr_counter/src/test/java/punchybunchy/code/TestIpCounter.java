@@ -113,6 +113,7 @@ public class TestIpCounter {
 
         assertThat(treeNode.search(validIp)).isTrue();
         assertThat(treeNode.search(validIpNotAdded)).isFalse();
+
     }
 
 }
