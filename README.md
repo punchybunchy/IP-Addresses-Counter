@@ -10,10 +10,9 @@ The application also includes the following utilities:
 * IP Address Converter - convert IP Address to Decimal
 
 ### Maintainability tests and linter statuses:
-[![Actions Status](https://github.com/punchybunchy/java-project-73/workflows/hexlet-check/badge.svg)](https://github.com/punchybunchy/java-project-73/actions)
-[![Java CI](https://github.com/punchybunchy/java-project-73/actions/workflows/app-check.yml/badge.svg)](https://github.com/punchybunchy/java-project-73/actions/workflows/app-check.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/ae0551eef6a05ab2c0d2/maintainability)](https://codeclimate.com/github/punchybunchy/java-project-73/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/ae0551eef6a05ab2c0d2/test_coverage)](https://codeclimate.com/github/punchybunchy/java-project-73/test_coverage)
+[![Java CI](https://github.com/punchybunchy/IP-Addresses-Counter/actions/workflows/app-check.yml/badge.svg)](https://github.com/punchybunchy/IP-Addresses-Counter/actions/workflows/app-check.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/846aa18423e38a6e90e1/maintainability)](https://codeclimate.com/github/punchybunchy/IP-Addresses-Counter/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/846aa18423e38a6e90e1/test_coverage)](https://codeclimate.com/github/punchybunchy/IP-Addresses-Counter/test_coverage)
 
 
 
