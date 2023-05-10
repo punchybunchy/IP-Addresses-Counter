@@ -3,8 +3,8 @@ package punchybunchy.code;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import punchybunchy.code.util.FileReader;
-import punchybunchy.code.util.IpAddressConverter;
+import punchybunchy.code.util.DataReader;
+import punchybunchy.code.util.IpAddressValidator;
 import punchybunchy.code.util.IpAddressGenerator;
 
 import java.nio.file.Files;
@@ -13,7 +13,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static punchybunchy.code.util.IpAddressConverter.INVALID_IP_ADDRESS;
 
 public class TestIpCounter {
     private TreeNode treeNode;
@@ -38,12 +37,9 @@ public class TestIpCounter {
 
         final int numberOfUniqueIps = 5;
 
-        exampleIps
-                .forEach(line -> {
-                    long number = IpAddressConverter.ipToLong(line);
-                    String key = String.valueOf(number);
-                    treeNode.insert(key);
-                });
+        exampleIps.stream()
+                .filter(IpAddressValidator::checkIp)
+                .forEach(treeNode::insert);
         long actual = treeNode.getIpAddressesCounter();
 
         assertThat(actual).isEqualTo(numberOfUniqueIps);
@@ -64,12 +60,10 @@ public class TestIpCounter {
 
         final int numberOfUniqueIps = 4;
 
-        exampleIps
-                .forEach(line -> {
-                    long number = IpAddressConverter.ipToLong(line);
-                    String key = String.valueOf(number);
-                    treeNode.insert(key);
-                });
+        exampleIps.stream()
+                .filter(IpAddressValidator::checkIp)
+                .forEach(treeNode::insert);
+
         long actual = treeNode.getIpAddressesCounter();
 
         assertThat(actual).isEqualTo(numberOfUniqueIps);
@@ -82,7 +76,7 @@ public class TestIpCounter {
         IpAddressGenerator.generateIpAddressesCollection(amountOfIpAddresses, filePath);
         Path path = Paths.get(filePath).toAbsolutePath().normalize();
 
-        long actualNumberIpsInFile = FileReader.getLineFromFile(filePath).toList().size();
+        long actualNumberIpsInFile = DataReader.getLineFromFile(filePath).toList().size();
 
 
         assertThat(Files.exists(path)).isTrue();
@@ -90,19 +84,16 @@ public class TestIpCounter {
     }
 
     @Test
-    void testIpAddressConverter() {
+    void testIpAddressValidator() {
         final String validIp = "192.100.50.20";
-        final long expectedValidIp = 3227791892L;
-        long actualValidIp = IpAddressConverter.ipToLong(validIp);
-
         final String invalidIp1 = "256.100.288.17";
         final String invalidIp2 = "192.100.50.20.1";
         final String invalidIp3 = "100.50.20";
 
-        assertThat(actualValidIp).isEqualTo(expectedValidIp);
-        assertThat(IpAddressConverter.ipToLong(invalidIp1)).isEqualTo(INVALID_IP_ADDRESS);
-        assertThat(IpAddressConverter.ipToLong(invalidIp2)).isEqualTo(INVALID_IP_ADDRESS);
-        assertThat(IpAddressConverter.ipToLong(invalidIp3)).isEqualTo(INVALID_IP_ADDRESS);
+        assertThat(IpAddressValidator.checkIp(validIp)).isTrue();
+        assertThat(IpAddressValidator.checkIp(invalidIp1)).isFalse();
+        assertThat(IpAddressValidator.checkIp(invalidIp2)).isFalse();
+        assertThat(IpAddressValidator.checkIp(invalidIp3)).isFalse();
     }
 
     @Test
@@ -113,7 +104,6 @@ public class TestIpCounter {
 
         assertThat(treeNode.search(validIp)).isTrue();
         assertThat(treeNode.search(validIpNotAdded)).isFalse();
-
     }
 
 }

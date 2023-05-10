@@ -3,11 +3,10 @@ package punchybunchy.code;
 import java.util.HashMap;
 import java.util.Map;
 
-import static punchybunchy.code.util.IpAddressConverter.INVALID_IP_ADDRESS;
 
 public final class TreeNode {
     private boolean isLeaf;
-    private final Map<Character, TreeNode> child;
+    private final Map<Short, TreeNode> child;
     private long leafCounter;
 
 
@@ -16,18 +15,18 @@ public final class TreeNode {
     }
 
 
-    public void insert(String key) {
-        if (key.length() == 0 || key.equals(String.valueOf(INVALID_IP_ADDRESS))) {
-            return;
-        }
+    public void insert(String ip) {
 
         TreeNode current = this;
 
-        for (char k : key.toCharArray()) {
+        for (String k : ip.split("\\.")) {
+            //Переводим в short для экономии памяти
+            short key = Short.parseShort(k);
+
             //Проверяем есть ли данный ключ в данной узле, если нет, то добавляем ключи и создаем дочерний узел
-            current.getChild().putIfAbsent(k, new TreeNode());
+            current.getChild().putIfAbsent(key, new TreeNode());
             //Вызываем следующий (дочерний) узел
-            current = current.getChild().get(k);
+            current = current.getChild().get(key);
         }
 
         // По завершению помечаем текущий узел как лист, ip адрес добавлен
@@ -42,10 +41,11 @@ public final class TreeNode {
 
     //На случай если потребуется найти отдельно взятый ip адрес
     //Метод возвращает true или false если не удалось найти адрес
-    public boolean search(String key) {
+    public boolean search(String ip) {
         TreeNode current = this;
-        for (char k : key.toCharArray()) {
-            current = current.getChild().get(k);
+        for (String k : ip.split("\\.")) {
+            short key = Short.parseShort(k);
+            current = current.getChild().get(key);
 
             // если у текущего узла null значение, то достигли конца пути, но не нашли строку (ip адрес) целиком
             if (current == null) {
@@ -64,7 +64,7 @@ public final class TreeNode {
         isLeaf = false;
         child = new HashMap<>();
     }
-    public Map<Character, TreeNode> getChild() {
+    public Map<Short, TreeNode> getChild() {
         return child;
     }
 

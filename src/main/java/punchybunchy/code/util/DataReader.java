@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-public class FileReader {
+public class DataReader {
 
     public static Stream<String> getLineFromFile(String path) {
         try {
